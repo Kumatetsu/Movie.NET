@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1.Interface
 {
-    interface IServiceFacade
+    public interface IServiceFacade
     {
         ICommentDao GetCommentDao();
         IFilmDao GetFilmDao();

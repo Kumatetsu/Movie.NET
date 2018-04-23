@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1.Interface
 {
-    interface ICommentDao
+    public interface ICommentDao
     {
         Comment CreateComment(Comment comment);
         Comment UpdateComment(Comment comment);

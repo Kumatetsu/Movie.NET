@@ -8,14 +8,17 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1.Factory
 {
-    class ServiceFacadeFactory
+    public class ServiceFacadeFactory
     {
-        IServiceFacade GetServiceFacade() {
-            IServiceFacade serviceFacade = null;
+        static IServiceFacade serviceFacade = null;
+        static public IServiceFacade GetServiceFacade() {
 
-            serviceFacade = new ServiceFacade.ServiceFacade();
+            if (null == serviceFacade)
+            {
+                serviceFacade = new ServiceFacade.ServiceFacade();
+            }
 
             return serviceFacade;
-        };
+        }
     }
 }

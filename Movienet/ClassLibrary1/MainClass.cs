@@ -8,13 +8,10 @@ namespace ClassLibrary1
 {
     public class MainClass
     {
-        static void Main(string[] args)
+
+        public static void Main(string[] args)
         {
-            DataModelContainer ctx = new DataModelContainer();
-
-            User user = new User();
-
-            ctx.SaveChanges();
+            
         }
     }
 }
