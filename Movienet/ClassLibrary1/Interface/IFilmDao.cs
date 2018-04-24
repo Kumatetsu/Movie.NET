@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1.Interface
 {
-    interface IFilmDao
+    public interface IFilmDao
     {
         Film CreateFilm(Film film);
         Film UpdateFilm(Film film);

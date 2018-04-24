@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1.Interface
 {
-    interface IUserDao
+    public interface IUserDao
     {
         User CreateUser(User user);
         User UpdateUser(User user);

@@ -12,7 +12,10 @@ namespace ClassLibrary1.Dao
 
         public User CreateUser(User user)
         {
-            throw new NotImplementedException();
+            DataModelContainer ctx = new DataModelContainer();
+            ctx.Users.Add(user);
+            ctx.SaveChanges();
+            return user;
         }
 
         public User UpdateUser(User user)
