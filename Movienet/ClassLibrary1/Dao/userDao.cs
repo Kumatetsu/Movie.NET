@@ -12,27 +12,44 @@ namespace ClassLibrary1.Dao
 
         public User CreateUser(User user)
         {
-            throw new NotImplementedException();
+
+           DataModelContainer ctx = new DataModelContainer();
+           ctx.Users.Add(user);
+           ctx.SaveChanges();
+           return user;
         }
 
         public User UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            DataModelContainer ctx = new DataModelContainer();
+            User updated = ctx.Users.Where(u => u.Id == user.Id).FirstOrDefault();
+            updated = user;
+            ctx.SaveChanges();
+            return updated;
         }
 
         public bool DeleteUser(User user)
         {
-            throw new NotImplementedException();
+            DataModelContainer ctx = new DataModelContainer();
+            ctx.Users.Remove(user);
+            ctx.SaveChanges();
+            return true;
         }
 
         public List<User> getAllUsers()
         {
-            throw new NotImplementedException();
+            DataModelContainer ctx = new DataModelContainer();
+            List<User> users = ctx.Users.ToList();
+
+            return users;
         }
 
         public User GetUser(int uid)
         {
-            throw new NotImplementedException();
+            DataModelContainer ctx = new DataModelContainer();
+            User query = ctx.Users.Where(u => u.Id == uid).FirstOrDefault();
+
+            return query;
         }
     }
 }

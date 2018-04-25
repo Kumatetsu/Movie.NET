@@ -10,11 +10,6 @@ namespace ClassLibrary1
     {
         static void Main(string[] args)
         {
-            DataModelContainer ctx = new DataModelContainer();
-
-            User user = new User();
-
-            ctx.SaveChanges();
         }
     }
 }

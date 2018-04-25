@@ -11,27 +11,43 @@ namespace ClassLibrary1.Dao
     {
         public Film CreateFilm(Film film)
         {
-            throw new NotImplementedException();
+            DataModelContainer ctx = new DataModelContainer();
+            ctx.Films.Add(film);
+            ctx.SaveChanges();
+            return film;
         }
 
         public bool DeleteFilm(Film film)
         {
-            throw new NotImplementedException();
+            DataModelContainer ctx = new DataModelContainer();
+            ctx.Films.Remove(film);
+            ctx.SaveChanges();
+            return true;
         }
 
         public List<Film> getAllFilms()
         {
-            throw new NotImplementedException();
+            DataModelContainer ctx = new DataModelContainer();
+            List<Film> films = ctx.Films.ToList();
+
+            return films;
         }
 
         public Film GetFilm(int fid)
         {
-            throw new NotImplementedException();
+            DataModelContainer ctx = new DataModelContainer();
+            Film query = ctx.Films.Where(f => f.Id == fid).FirstOrDefault();
+
+            return query;
         }
 
         public Film UpdateFilm(Film film)
         {
-            throw new NotImplementedException();
+            DataModelContainer ctx = new DataModelContainer();
+            Film updated = ctx.Films.Where(f => f.Id == film.Id).FirstOrDefault();
+            updated = film;
+            ctx.SaveChanges();
+            return updated;
         }
     }
 }

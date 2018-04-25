@@ -10,12 +10,15 @@ namespace ClassLibrary1.Factory
 {
     class ServiceFacadeFactory
     {
-        IServiceFacade GetServiceFacade() {
-            IServiceFacade serviceFacade = null;
+        static IServiceFacade serviceFacade = null;
 
-            serviceFacade = new ServiceFacade.ServiceFacade();
+        static IServiceFacade GetServiceFacade() {
+            if (null == serviceFacade)
+            {
+                serviceFacade = new ServiceFacade.ServiceFacade();
+            }
 
             return serviceFacade;
-        };
+        }
     }
 }
