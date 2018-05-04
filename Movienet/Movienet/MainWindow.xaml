@@ -11,6 +11,11 @@
             <MenuItem Header="Display a user" Click="goToDisplayUser"/>
             <MenuItem Header="Add a user" Click="goToAddUser"/>
             <MenuItem Header="Authenticate" Click="goToAuthenticate"/>
+            <MenuItem Header="Films">
+                <MenuItem  Header="all films" Click="goToFilms"/>
+                <MenuItem Header="add film" Click="goToAddFilm"/>
+            </MenuItem >
+                
         </Menu>
         
         <Frame x:Name="root" Margin="10,31,10,10"/>

@@ -37,7 +37,8 @@ namespace ModelMovieNet.Dao
 
         public User GetUser(int uid)
         {
-            throw new NotImplementedException();
+            DataModelContainer ctx = new DataModelContainer();
+            return ctx.UserSet.Where(u => u.Id == uid).Select(u => u).FirstOrDefault();
         }
 
         public User LogUser(User user)

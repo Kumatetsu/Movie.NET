@@ -43,5 +43,15 @@ namespace Movienet
         {
             root.Content = new Authentication();
         }
+
+        private void goToFilms(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void goToAddFilm(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

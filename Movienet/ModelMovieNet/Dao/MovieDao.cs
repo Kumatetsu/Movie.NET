@@ -21,12 +21,17 @@ namespace ModelMovieNet.Dao
 
         public List<Movie> getAllMovies()
         {
-            throw new NotImplementedException();
+            DataModelContainer ctx = new DataModelContainer();
+            return ctx.MovieSet.ToList();
         }
 
         public Movie GetMovie(int fid)
         {
-            throw new NotImplementedException();
+            DataModelContainer ctx = new DataModelContainer();
+            return ctx.MovieSet
+                .Where(u => u.Id == fid)
+                .Select(u => u)
+                .FirstOrDefault();
         }
 
         public Movie UpdateMovie(Movie movie)
