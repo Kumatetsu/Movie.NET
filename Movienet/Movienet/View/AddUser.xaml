@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Movienet"
       mc:Ignorable="d"
-      DataContext="{Binding Source={StaticResource VM_UserLocator}, Path=VM_User}"
+      DataContext="{Binding Source={StaticResource VM_UserLocator}, Path=VM_User_Instance}"
       Title="AddUser" Width="526.257" Height="535.475">
     <Border BorderBrush="Black" BorderThickness="2">
         <Grid HorizontalAlignment="Left" Width="493" Margin="21,-11,0,31">

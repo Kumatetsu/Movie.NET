@@ -11,6 +11,20 @@
             <local:VM_Locator x:Key="VM_Locator" />
             <local:VM_RootLocator x:Key="VM_RootLocator" />
             <local:VM_UserLocator x:Key="VM_UserLocator" />
+            <local:VM_MovieRootLocator x:Key="VM_MovieRootLocator" />
+            <local:VM_MovieLocator x:Key="VM_MovieLocator" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,
+             /MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,
+             /MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,
+             /MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,
+             /MahApps.Metro;component/Styles/Accents/emerald.xaml" />
+                <ResourceDictionary Source="pack://application:,,,
+             /MahApps.Metro;component/Styles/Accents/baselight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
   </Application.Resources>
 </Application>

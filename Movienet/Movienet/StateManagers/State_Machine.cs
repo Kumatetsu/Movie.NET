@@ -15,31 +15,44 @@ namespace Movienet
      * To get them, the good way is to subscribe to CurrentUser and CurrentState channels
      * then to ask a trigger sending a string to Context channel
      * */
-    public class User_State_Machine : ViewModelBase
+    public class State_Machine: ViewModelBase
     {
-        public enum STATE { NONE, ADD, SELECT, UPDATE, DELETE, NEED_AUTHENTICATION };
-        private static STATE vm_user_state;
-        private static User currentUser = null;
-        private static User sessionUser = null;
+        public enum STATE {
+            NONE,
+            ADD_USER,
+            SELECT_USER,
+            UPDATE_USER,
+            DELETE_USER,
+            ADD_MOVIE,
+            SELECT_MOVIE,
+            UPDATE_MOVIE,
+            DELETE_MOVIE,
+            NEED_AUTHENTICATION
+        };
+        private static STATE vm_state;
+        private static User currentUser   = null;
+        private static Movie currentMovie = null;
+        private static User sessionUser   = null;
 
-        public User_State_Machine()
+        public State_Machine()
         {
             /**
              * The class subscribe to two setters and a request for the actual state
              * */
-            MessengerInstance.Register<STATE>(this, "SetUserState", SetUserState);
+            MessengerInstance.Register<STATE>(this, "SetState", SetState);
             MessengerInstance.Register<User>(this, "SetUser", SetUser);
+            MessengerInstance.Register<Movie>(this, "SetMovie", SetMovie);
             MessengerInstance.Register<User>(this, "SetSessionUser", SetSessionUser);
             MessengerInstance.Register<string>(this, "Context", SendContext);
         }
 
-        protected STATE VM_User_State
+        protected STATE VM_State
         {
-            get { return vm_user_state; }
+            get { return vm_state; }
             private set
             {
-                vm_user_state = value;
-                MessengerInstance.Send(VM_User_State, "state_changed");
+                vm_state = value;
+                MessengerInstance.Send(VM_State, "state_changed");
             }
         }
 
@@ -63,22 +76,31 @@ namespace Movienet
             }
         }
 
+        protected Movie CurrentMovie
+        {
+            get { return currentMovie; }
+            set
+            {
+                currentMovie = value;
+            }
+        }
+
         /**
          * Possible upper logic for the class wich
          * implement it (Actually, VM_RootFrame)
          * */
         public virtual void StateChangedAck(STATE state)
         {
-            Console.WriteLine("USER_STATE_MACHINE Ack");
+            Console.WriteLine("STATE_MACHINE Ack");
         }
 
         /**
          * Setters messenger callbacks
          * */
-        void SetUserState(STATE state)
+        void SetState(STATE state)
         {
-            Console.WriteLine("User_State_Machine: set State to: " + state);
-            VM_User_State = state;
+            Console.WriteLine("State_Machine: set State to: " + state);
+            VM_State = state;
         }
         
         void SetUser(User user)
@@ -86,9 +108,15 @@ namespace Movienet
             CurrentUser = user;
         }
 
+        void SetMovie(Movie movie)
+        {
+            Console.WriteLine("State Machine set movie to: " + movie.ToString());
+            CurrentMovie = movie;
+        }
+
         void SetSessionUser(User user)
         {
-            Console.WriteLine("User State Machine set session user: " + ((user.Id > 0) ? user.Login : "INVALID USER"));
+            Console.WriteLine("State Machine set session user: " + ((user.Id > 0) ? user.Login : "INVALID USER"));
             Session = user;
         }
 
@@ -98,10 +126,12 @@ namespace Movienet
          * */
         void SendContext(string ask)
         {
-            Console.WriteLine("User_State_Machine: send context to " + ask);
-            Console.WriteLine("User_State_Machine: " + CurrentUser?.ToString() + " " + VM_User_State);
+            Console.WriteLine("State_Machine: send context to " + ask);
+            Console.WriteLine("State_Machine: currentUser " + CurrentUser?.ToString() + " " + VM_State);
+            Console.WriteLine("State_Machine: currentMovie " + CurrentMovie?.ToString() + " " + VM_State);
             MessengerInstance.Send(CurrentUser, "CurrentUser");
-            MessengerInstance.Send(VM_User_State, "CurrentState");
+            MessengerInstance.Send(CurrentMovie, "CurrentMovie");
+            MessengerInstance.Send(VM_State, "CurrentState");
             MessengerInstance.Send(Session, "CurrentSessionUser");
         }
     }

@@ -3,7 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Windows.Controls;
 using ModelMovieNet;
-using static Movienet.User_State_Machine;
+using static Movienet.State_Machine;
 
 namespace Movienet
 {
@@ -49,7 +49,6 @@ namespace Movienet
         
         // Navigation
         public RelayCommand OpenCreateUser { get; set; }
-        public RelayCommand OpenAuthentication { get; set; }
 
         /**
          * Constructor
@@ -88,22 +87,22 @@ namespace Movienet
             Console.WriteLine("VM_Root_Frame VM_USER_STATE CHANGED");
             switch (state)
             {
-                case STATE.ADD:
-                    Info = "VM_Root_Frame Handling ADD state";
+                case STATE.ADD_USER:
+                    Info = "VM_Root_Frame Handling ADD_USER state";
                     Console.WriteLine(Info);
                     Detail = new AddUser();
                     break;
-                case STATE.SELECT:
-                    Info = "VM_Root_Frame Handling SELECT state";
+                case STATE.SELECT_USER:
+                    Info = "VM_Root_Frame Handling SELECT_USER state";
                     Console.WriteLine(Info);
                     Detail = new UserDetail();
                     break;
-                case STATE.UPDATE:
-                    Info = "VM_Root_Frame Handling UPDATE state";
+                case STATE.UPDATE_USER:
+                    Info = "VM_Root_Frame Handling UPDATE_USER state";
                     Console.WriteLine(Info);
                     break;
-                case STATE.DELETE:
-                    Info = "VM_Root_Frame Handling DELETE state";
+                case STATE.DELETE_USER:
+                    Info = "VM_Root_Frame Handling DELETE_USER state";
                     Console.WriteLine(Info);
                     break;
                 case STATE.NEED_AUTHENTICATION:
@@ -124,21 +123,10 @@ namespace Movienet
         {
             User u = new User();
             MessengerInstance.Send(u, "SetUser");
-            MessengerInstance.Send(STATE.ADD, "SetUserState");
+            MessengerInstance.Send(STATE.ADD_USER, "SetState");
             Info = "RootFrame set context to Add and user to new one";
             Console.WriteLine(Info);
         }
 
-        /**
-         * Display an Authentication view on Detail page
-         * */
-        private void GoToAuthentication()
-        {
-            User u = new User();
-            MessengerInstance.Send(u, "SetUser");
-            MessengerInstance.Send(STATE.NEED_AUTHENTICATION, "SetUserState");
-            Info = "RootFrame set context to Authentication and user to new one";
-            Console.WriteLine(Info);
-        }
     }
 }

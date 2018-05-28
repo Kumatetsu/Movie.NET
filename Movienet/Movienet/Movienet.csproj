@@ -38,6 +38,9 @@
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -49,6 +52,9 @@
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Extras, Version=4.4.32.39728, Culture=neutral, PublicKeyToken=0e27b6f8be9b2ef7, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.4.4.32.7\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.6.4\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -62,7 +68,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.4.4.32.7\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
@@ -83,10 +89,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\MovieDetail.xaml.cs">
+      <DependentUpon>MovieDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\VM_Authentication.cs" />
-    <Compile Include="User_State_Machine.cs" />
+    <Compile Include="StateManagers\State_Machine.cs" />
+    <Compile Include="ViewModel\VM_DisplayMovies.cs" />
+    <Compile Include="ViewModel\VM_MovieRootFrame.cs" />
+    <Compile Include="ViewModel\VM_Movies.cs" />
     <Compile Include="ViewModel\VM_RootFrame.cs" />
     <Compile Include="ViewModel\VM_User.cs" />
+    <Compile Include="View\AddMovie.xaml.cs">
+      <DependentUpon>AddMovie.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
     </Compile>
@@ -97,12 +112,21 @@
     <Compile Include="View\Authentication.xaml.cs">
       <DependentUpon>Authentication.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DisplayMovies.xaml.cs">
+      <DependentUpon>DisplayMovies.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DisplayUsers.xaml.cs">
       <DependentUpon>DisplayUsers.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\VM_DisplayUsers.cs" />
+    <Compile Include="View\MovieRootFrame.xaml.cs">
+      <DependentUpon>MovieRootFrame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RootFrame.xaml.cs">
       <DependentUpon>RootFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UpdateMovie.xaml.cs">
+      <DependentUpon>UpdateMovie.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UpdateUser.xaml.cs">
       <DependentUpon>UpdateUser.xaml</DependentUpon>
@@ -112,6 +136,8 @@
     </Compile>
     <Compile Include="VM_Locator.cs" />
     <Compile Include="VM_MainWindow.cs" />
+    <Compile Include="VM_MovieLocator.cs" />
+    <Compile Include="VM_MovieRootLocator.cs" />
     <Compile Include="VM_RootLocator.cs" />
     <Compile Include="VM_UserLocator.cs" />
   </ItemGroup>
@@ -146,6 +172,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\MovieDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddMovie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -158,11 +192,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DisplayMovies.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DisplayUsers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\MovieRootFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\RootFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UpdateMovie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
