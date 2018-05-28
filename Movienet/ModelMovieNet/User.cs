@@ -31,12 +31,19 @@ namespace ModelMovieNet
 
         public override string ToString()
         {
+            string comments = " -- ";
+            foreach (Comment comment in this.Comments)
+            {
+                comments += " - " + comment.ToString() + " - ";
+            }
+            comments += " -- ";
             return "User - " +
                 " ID: " + this.Id +
                 " Login: " + this.Login +
                 " Password: " + this.Password +
                 " Firstname " + this.Firstname +
                 " Lastname " + this.Lastname +
+                " Comments " + comments +
                 " - ";
         }
 
@@ -53,6 +60,11 @@ namespace ModelMovieNet
                 check = check && param.Password == this.Password;
             }
             return check;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

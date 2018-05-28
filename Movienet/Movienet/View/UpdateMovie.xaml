@@ -1,0 +1,28 @@
+﻿<Page x:Class="Movienet.UpdateMovie"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Movienet"
+      mc:Ignorable="d"
+      DataContext="{Binding Source={StaticResource VM_MovieLocator}, Path=VM_Movie_Instance}"
+      Title="UpdateUser" Height="401.087" Width="187.5">
+    <Border BorderBrush="Black" BorderThickness="2">
+        <Grid Margin="10,28,0,0">
+            <TextBlock x:Name="updateInfo" HorizontalAlignment="Left" Margin="10,10,0,0"  TextWrapping="WrapWithOverflow" Text="{Binding Info}" VerticalAlignment="Top" Height="49" Width="154" RenderTransformOrigin="0.5,0.5">
+            </TextBlock>
+            <TextBox x:Name="iId" Text="{Binding Movie.Id}" HorizontalAlignment="Left" Height="23" Margin="25,64,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="45" RenderTransformOrigin="-2.179,5.288"/>
+            <TextBox x:Name="iTitle" Text="{Binding Movie.Title}" HorizontalAlignment="Left" Height="23" Margin="10,118,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="154"/>
+            <TextBox x:Name="iType" Text="{Binding Movie.Type}" HorizontalAlignment="Left" Height="23" Margin="10,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154"/>
+            <TextBox x:Name="iAbstract" Text="{Binding Movie.Abstract}" HorizontalAlignment="Left" Height="23" Margin="10,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154"/>
+            <Label x:Name="label_id" Content="Id" HorizontalAlignment="Left" Margin="70,64,0,0" VerticalAlignment="Top" Width="94"/>
+            <Label x:Name="label_title" Content="Title" HorizontalAlignment="Left" Margin="10,87,0,0" VerticalAlignment="Top" Width="154" RenderTransformOrigin="1.21,3.178"/>
+            <Label x:Name="label_type" Content="Type" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Width="154"/>
+            <Label x:Name="label_abstract" Content="Abstract" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Width="154"/>
+            <Button x:Name="updateBtn" Content="Update" Command="{Binding Update}" HorizontalAlignment="Left" Margin="10,330,0,0" VerticalAlignment="Top" Width="80" Height="22"/>
+            <Button Content="Delete" MinWidth="10" Margin="90,330,14,14" Command="{Binding Delete}" RenderTransformOrigin="0.5,0.5">
+            </Button>
+            <Label x:Name="label" Content="UpdateUser" HorizontalAlignment="Left" VerticalAlignment="Top" Height="10" Width="178"/>
+        </Grid>
+    </Border>
+</Page>

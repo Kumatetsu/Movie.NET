@@ -1,0 +1,28 @@
+﻿<Page x:Class="Movienet.AddMovie"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Movienet"
+      mc:Ignorable="d"
+      DataContext="{Binding Source={StaticResource VM_MovieLocator}, Path=VM_Movie_Instance}"
+      Title="AddUser" Width="526.257" Height="535.475">
+    <Border BorderBrush="Black" BorderThickness="2">
+        <Grid HorizontalAlignment="Left" Width="493" Margin="21,-11,0,31">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="14*"/>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="19*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="infoAdd" HorizontalAlignment="Left" Margin="20,406,0,0" TextWrapping="WrapWithOverflow" Text="{Binding Info}" VerticalAlignment="Top" Height="95" Width="264" Grid.Column="2"/>
+            <Label x:Name="titleLabel" Content="Title" HorizontalAlignment="Left" Margin="6,58,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Height="26"/>
+            <TextBox x:Name="Title" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="6,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+            <Label x:Name="typeLabel" Content="Type" HorizontalAlignment="Left" Margin="6,124,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Height="26"/>
+            <TextBox x:Name="type" Text="{Binding Type, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="6,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+            <Label x:Name="abstractLabel" Content="Abstract" HorizontalAlignment="Left" Margin="6,196,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Height="26"/>
+            <TextBox x:Name="abstract" Text="{Binding Abstract, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="6,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+            <Button x:Name="AddBtn" Content="Add a movie" Command="{Binding Add}" HorizontalAlignment="Left" Margin="10,376,0,0" VerticalAlignment="Top" Width="95" Grid.Column="2" Height="25"/>
+            <Label x:Name="label" Content="AddMovie" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="123" Width="189"/>
+        </Grid>
+    </Border>
+</Page>

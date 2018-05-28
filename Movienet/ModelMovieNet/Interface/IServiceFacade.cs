@@ -9,7 +9,7 @@ namespace ModelMovieNet.Interface
     public interface IServiceFacade
     {
         ICommentDao GetCommentDao();
-        IMovieDao GetFilmDao();
+        IMovieDao GetMovieDao();
         IUserDao GetUserDao();
     }
 }
