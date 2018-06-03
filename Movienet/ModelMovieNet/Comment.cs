@@ -21,6 +21,12 @@ namespace ModelMovieNet
         public virtual User User { get; set; }
         public virtual Movie Movie { get; set; }
 
+        public Comment()
+        {
+            this.User = new User();
+            this.Movie = new Movie();
+        }
+
         public override string ToString()
         {
             return "Comment - " +

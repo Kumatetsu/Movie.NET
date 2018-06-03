@@ -46,7 +46,7 @@ namespace ModelMovieNet.Dao
             Console.WriteLine("In UpdateComment, return of update method: " + toUpdate.ToString());
             toUpdate.Message = comment.Message;
             toUpdate.Movie = comment.Movie;
-            toUpdate. Note = comment.Note;
+            toUpdate.Note = comment.Note;
             toUpdate.User = comment.User;
             if (toUpdate.Equals(comment))
             {
