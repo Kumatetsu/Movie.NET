@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Navigation;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using ModelMovieNet;
 using ModelMovieNet.Factory;
 using ModelMovieNet.Interface;
-using static Movienet.User_State_Machine;
+using static Movienet.State_Machine;
 
 namespace Movienet
 {
@@ -305,8 +301,9 @@ namespace Movienet
          * */
         void OpenUpdateForm()
         {
+            MessengerInstance.Send(User, "SetUser");
+            MessengerInstance.Send(STATE.UPDATE_USER, "SetState");
             Form = new UpdateUser();
-            MessengerInstance.Send(STATE.UPDATE, "SetUserState");
         }
 
         /**
@@ -382,7 +379,7 @@ namespace Movienet
                 if (checkUser != null && checkUser.Id > 0)
                 {
                     Info = "Add happens well";
-                    MessengerInstance.Send(STATE.ADD, "SetUserState");
+                    MessengerInstance.Send(STATE.ADD_USER, "SetState");
                     Console.WriteLine(Info);
                 }
                 else
@@ -422,7 +419,7 @@ namespace Movienet
                 {
                     Info = "Update happens well";
                     Console.WriteLine(Info);
-                    MessengerInstance.Send(STATE.UPDATE, "SetUserState");
+                    MessengerInstance.Send(STATE.UPDATE_USER, "SetState");
                 }
                 else
                 {
@@ -462,7 +459,7 @@ namespace Movienet
                 if (uDao.DeleteUser(User))
                 {
                     Info = "DeleteUser passed";
-                    MessengerInstance.Send(STATE.DELETE, "SetUserState");
+                    MessengerInstance.Send(STATE.DELETE_USER, "SetState");
                     User = new User();
                 }
                 else

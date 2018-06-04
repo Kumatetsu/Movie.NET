@@ -4,7 +4,7 @@ using GalaSoft.MvvmLight;
 using ModelMovieNet;
 using ModelMovieNet.Factory;
 using ModelMovieNet.Interface;
-using static Movienet.User_State_Machine;
+using static Movienet.State_Machine;
 
 namespace Movienet
 {
@@ -18,7 +18,7 @@ namespace Movienet
     public class VM_DisplayUsers: ViewModelBase
     {
         // Entity
-        private ObservableCollection<User> _users { get; set; }
+        private ObservableCollection<User> _users;
 
         /**
          * Access to Dao, can be inherited
@@ -92,7 +92,7 @@ namespace Movienet
                 _selectItem = value;
                 ListInfo = "Item selected";
                 MessengerInstance.Send(_selectItem, "SetUser");
-                MessengerInstance.Send(STATE.SELECT, "SetUserState");
+                MessengerInstance.Send(STATE.SELECT_USER, "SetState");
                 RaisePropertyChanged("SelectItem");
             }
         }
@@ -124,21 +124,21 @@ namespace Movienet
             State = state;
             switch (state)
             {
-                case STATE.ADD:
+                case STATE.ADD_USER:
                     ListInfo = "VM_Display_Users:  Handling ADD state";
                     Console.WriteLine(ListInfo);
                     RefreshUserList();
                     break;
-                case STATE.SELECT:
+                case STATE.SELECT_USER:
                     ListInfo = "VM_Display_Users:  Handling SELECT state";
                     Console.WriteLine(ListInfo);
                     break;
-                case STATE.UPDATE:
+                case STATE.UPDATE_USER:
                     ListInfo = "VM_Display_Users:  Handling UPDATE state";
                     Console.WriteLine(ListInfo);
                     RefreshUserList();
                     break;
-                case STATE.DELETE:
+                case STATE.DELETE_USER:
                     ListInfo = "VM_Display_Users:  Handling DELETE state";
                     Console.WriteLine(ListInfo);
                     RefreshUserList();

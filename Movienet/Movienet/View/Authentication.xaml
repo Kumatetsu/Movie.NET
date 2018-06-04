@@ -5,12 +5,29 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Movienet"
       mc:Ignorable="d" 
-      DataContext="{Binding Source={StaticResource VM_UserLocator}, Path=VM_User}"
-      d:DesignHeight="450" d:DesignWidth="800"
+      DataContext="{Binding Source={StaticResource VM_UserLocator}, Path=VM_User_Instance}"
+      d:DesignHeight="315" d:DesignWidth="500"
+      Background="AntiqueWhite"
       Title="Authentication">
 
-    <Grid x:Name="LoginLayer" Background="#FFFFFFFF" Grid.RowSpan="2">
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightBlue">
+    <Grid x:Name="LoginLayer" Background="Gray" Grid.RowSpan="2" Margin="10,10,10,10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="401*"/>
+            <ColumnDefinition Width="89*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="133*"/>
+            <RowDefinition Height="317*"/>
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" Margin="1,1,1,1" Width="490" Height="300" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.091"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -21,12 +38,12 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Log in" Grid.ColumnSpan="2" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" FontSize="20"/>
-            <TextBlock Text="Login" Grid.Row="1" Margin="3"/>
-            <TextBox x:Name="Login" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="3" MinWidth="100" HorizontalAlignment="Left"/>
-            <TextBlock Text="Password" Grid.Row="2" Margin="3"/>
-            <TextBox x:Name="Password" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" Margin="3" MinWidth="100" HorizontalAlignment="Left"/>
-            <Button Command="{Binding Log}" Content="Log in" Grid.Row="3" Grid.Column="1" Margin="3"/>
+            <TextBlock Text="Authentication" Grid.ColumnSpan="2" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" FontSize="20"/>
+            <TextBlock Text="Login" FontSize="16" Margin="108,45,216,40" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <TextBox x:Name="Login" TextWrapping="NoWrap" FontSize="22" AcceptsReturn="False" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Margin="108,75,0,23" MinWidth="100" HorizontalAlignment="Left" Width="276" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <TextBlock Text="Password" FontSize="16" Grid.Row="2" Margin="108,-5,220,10" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="Password" TextWrapping="NoWrap" FontSize="22" AcceptsReturn="False" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Margin="108,22,0,0" MinWidth="100" HorizontalAlignment="Left" Width="276" Grid.ColumnSpan="2"/>
+            <Button Command="{Binding Log}" Content="Log in" Grid.Row="3" Margin="108,26,105,10" Grid.ColumnSpan="2"/>
         </Grid>
     </Grid>
 </Page>

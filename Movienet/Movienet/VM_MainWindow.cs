@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using ModelMovieNet;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Windows.Controls;
 
 namespace Movienet
 {
-    public class VM_MainWindow: User_State_Machine
+    public class VM_MainWindow: State_Machine
     {
         private User sessionUser;
         private Page _rootPage;
@@ -26,6 +27,18 @@ namespace Movienet
             }
         }
 
+        private string _info;
+
+        public string Info
+        {
+            get { return _info; }
+            set { _info = value; }
+        }
+
+
+        public RelayCommand OpenAuthentication { get; set; }
+        public RelayCommand OpenUserManagement { get; set; }
+        public RelayCommand OpenMovieManagement { get; set; }
         /**
          * Constructor
          * */
@@ -39,6 +52,9 @@ namespace Movienet
             AppDomain.CurrentDomain.SetData("DataDirectory", dataDir);
             Console.WriteLine("Buidling RootPage");
             MessengerInstance.Register<User>(this, "SessionUser", SetSessionUser);
+            OpenAuthentication = new RelayCommand(() => GoToAuthentication());
+            OpenUserManagement = new RelayCommand(() => GoToUserManagement());
+            OpenMovieManagement = new RelayCommand(() => GoToMovieManagement());
             RootPage = new Authentication();
         }
 
@@ -64,6 +80,39 @@ namespace Movienet
                 Console.WriteLine("VM_MainWindow: authentication");
                 RootPage = new Authentication();
             }
+        }
+
+        /**
+         * Display an Authentication view on Detail page
+         * */
+        private void GoToAuthentication()
+        {
+            User u = new User();
+            MessengerInstance.Send(u, "SetUser");
+            MessengerInstance.Send(STATE.NEED_AUTHENTICATION, "SetState");
+            RootPage = new Authentication();
+            Info = "MainWindow set context to Authentication and user to new one";
+            Console.WriteLine(Info);
+        }
+
+        /**
+         * Display an Authentication view on Detail page
+         * */
+        private void GoToUserManagement()
+        {
+            RootPage = new RootFrame();
+            Info = "MainWindow set rootFrame for user management";
+            Console.WriteLine(Info);
+        }
+
+        /**
+         * Display an Authentication view on Detail page
+         * */
+        private void GoToMovieManagement()
+        {
+            RootPage = new MovieRootFrame();
+            Info = "MainWindow set movieRootFrame for movie management";
+            Console.WriteLine(Info);
         }
     }
 }

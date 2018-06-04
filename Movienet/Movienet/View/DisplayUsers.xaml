@@ -4,16 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Movienet"
-      mc:Ignorable="d" 
-      d:DesignHeight="550"
+      mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource VM_UserLocator}, Path=VM_DisplayUsers}"
-      Title="Display users" Width="300">
+      Title="Display users" Width="254" Height="508">
     <Border BorderBrush="Black" BorderThickness="2">
-        <Grid Margin="0,0,10,0">
-            <TextBlock x:Name="duInfo" HorizontalAlignment="Left" Margin="10,80,-134,0"  TextWrapping="WrapWithOverflow" Text="{Binding ListInfo}" VerticalAlignment="Top" Height="78" Width="278" RenderTransformOrigin="0.5,0.5">
+        <Grid Margin="0,0,10,8">
+            <TextBlock x:Name="duInfo" HorizontalAlignment="Left" Margin="10,80,0,0"  TextWrapping="WrapWithOverflow" Text="{Binding ListInfo}" VerticalAlignment="Top" Height="78" Width="220" RenderTransformOrigin="0.5,0.5">
             </TextBlock>
-            <TextBlock x:Name="textBlock" FontSize="32" Text="Display users"  HorizontalAlignment="Left" Margin="32,10,-98,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="47" Width="220"/>
-            <ListBox x:Name="UserListDef" ItemsSource="{Binding Users}" DisplayMemberPath="Firstname" SelectedItem="{Binding SelectItem}" Margin="10,160,0,30"/>
+            <TextBlock x:Name="textBlock" FontSize="32" Text="Display users"  HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="65" Width="220"/>
+            <ListBox x:Name="UserListDef" ItemsSource="{Binding Users}" DisplayMemberPath="Firstname" SelectedItem="{Binding SelectItem}" Margin="10,160,10,0" Height="358" VerticalAlignment="Top"/>
         </Grid>
     </Border>
 </Page>

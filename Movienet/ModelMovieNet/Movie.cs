@@ -27,5 +27,43 @@ namespace ModelMovieNet
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
+
+
+        public override string ToString()
+        {
+            string comments = " -- ";
+            foreach (Comment comment  in this.Comments)
+            {
+                comments += " - " + comment.ToString() + " - ";
+            }
+            comments += " -- ";
+            return "Movie - " +
+                " ID: " + this.Id +
+                " Title: " + this.Title +
+                " Abstract: " + this.Abstract+
+                " Type " + this.Type +
+                " Comments - " + comments +
+                " - ";
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool check = false;
+            if (obj.GetType() == this.GetType())
+            {
+                Movie param = (Movie)obj;
+                check = true;
+                check = check && param.Title == this.Title;
+                check = check && param.Abstract == this.Abstract;
+                check = check && param.Type == this.Type;
+                check = check && param.Comments.Equals(this.Comments);
+            }
+            return check;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

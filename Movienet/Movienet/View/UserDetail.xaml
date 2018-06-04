@@ -5,25 +5,26 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Movienet"
       mc:Ignorable="d"
-      DataContext="{Binding Source={StaticResource VM_UserLocator}, Path=VM_User}"
-      Title="UserDetail" Width="499.152" Height="652.81">
+      DataContext="{Binding Source={StaticResource VM_UserLocator}, Path=VM_User_Instance}"
+      Title="UserDetail" Width="499.152" Height="549.068">
     <Border BorderBrush="Black" BorderThickness="2">
-        <Grid HorizontalAlignment="Right" Width="390">
+        <Grid HorizontalAlignment="Right" Width="487">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5*"/>
                 <RowDefinition Height="31"/>
                 <RowDefinition Height="499*"/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="detailInfo" HorizontalAlignment="Left" Margin="-80,41,0,0"  TextWrapping="WrapWithOverflow" Text="{Binding Info}" VerticalAlignment="Top" Height="78" Width="175" RenderTransformOrigin="0.5,0.5" Grid.Row="2"/>
-            <ListBox Margin="-95,169,295,5" Grid.Row="2">
+            <TextBlock x:Name="detailInfo" HorizontalAlignment="Left" Margin="10,41,0,0"  TextWrapping="WrapWithOverflow" Text="{Binding Info}" VerticalAlignment="Top" Height="78" Width="175" RenderTransformOrigin="0.5,0.5" Grid.Row="2"/>
+            <ListBox Margin="10,124,271,57" Grid.Row="2">
                 <ListBoxItem Content="{Binding User.Id}"></ListBoxItem>
                 <ListBoxItem Content="{Binding User.Firstname}"></ListBoxItem>
                 <ListBoxItem Content="{Binding User.Lastname}"></ListBoxItem>
                 <ListBoxItem Content="{Binding User.Login}"></ListBoxItem>
                 <ListBoxItem Content="{Binding User.Password}"></ListBoxItem>
+                <ListBox Margin="-95,169,295,5" Grid.Row="2" ItemsSource="{Binding User.Comments}"></ListBox>
             </ListBox>
-            <Frame x:Name="updateUser" Content="{Binding Form}" Margin="100,41,3,10" NavigationUIVisibility="Hidden" RenderTransformOrigin="0.5,0.5" Grid.Row="2"/>
-            <Button Content="Edit Panel" MinWidth="10" Margin="-80,562,352,5" Command="{Binding GoToUpdate}" RenderTransformOrigin="1.949,2.414" Grid.Row="2">
+            <Frame x:Name="updateUser" Content="{Binding Form}" Margin="216,41,3,10" NavigationUIVisibility="Hidden" RenderTransformOrigin="0.5,0.5" Grid.Row="2"/>
+            <Button Content="Edit Panel" MinWidth="10" Margin="10,452,271,31" Command="{Binding GoToUpdate}" RenderTransformOrigin="1.949,2.414" Grid.Row="2">
             </Button>
             <Label x:Name="label" Content="UserDetail" HorizontalAlignment="Left" VerticalAlignment="Top" Width="380" Height="32" Grid.RowSpan="2"/>
         </Grid>

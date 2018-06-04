@@ -20,5 +20,34 @@ namespace ModelMovieNet
     
         public virtual User User { get; set; }
         public virtual Movie Movie { get; set; }
+
+        public override string ToString()
+        {
+            return "Comment - " +
+                " ID: " + this.Id +
+                " Note: " + this.Note +
+                " Message: " + this.Message +
+                " - ";
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool check = false;
+            if (obj.GetType() == this.GetType())
+            {
+                Comment param = (Comment)obj;
+                check = true;
+                check = check && param.Message == this.Message;
+                check = check && param.Note == this.Note;
+                check = check && param.User.Equals(this.User);
+                check = check && param.Movie.Equals(this.Movie);
+            }
+            return check;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

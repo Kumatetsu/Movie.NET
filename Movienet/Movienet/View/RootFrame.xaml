@@ -4,21 +4,19 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Movienet"
-      mc:Ignorable="d" 
-      d:DesignHeight="900" d:DesignWidth="900"
+      mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource VM_RootLocator}, Path=VM_RootFrame}"
-      Title="RootFrame">
+      Title="RootFrame" Height="1000" Width="1200">
     <Border BorderBrush="Black" BorderThickness="2">
         <Grid>
-            <Menu>
+            <Menu Margin="0,0,593,921">
                 <MenuItem Header="Add a user" Command="{Binding OpenCreateUser}" />
-                <MenuItem Header="Authenticate" Command="{Binding OpenAuthentication}"/>
             </Menu>
-            <Frame x:Name="list" Content="{Binding List}" Margin="0,108,465,0" NavigationUIVisibility="Hidden"/>
-            <Frame x:Name="detail" Content="{Binding Detail}" Margin="431,166,14,0" NavigationUIVisibility="Hidden"/>
-            <TextBlock x:Name="rootInfo" HorizontalAlignment="Left" Margin="10,80,-134,0"  TextWrapping="WrapWithOverflow" Text="{Binding Info}" VerticalAlignment="Top" Height="78" Width="278" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="rootInfo" Text="{Binding Info}" HorizontalAlignment="Left" Margin="603,10,0,0"  TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Height="151" Width="593" RenderTransformOrigin="0.5,0.5">
             </TextBlock>
-            <Label x:Name="label" Content="RootFrame" HorizontalAlignment="Left" VerticalAlignment="Top" Height="156" Width="450" Margin="440,10,0,0"/>
-        </Grid>
+            <Label x:Name="label" Content="RootFrame" HorizontalAlignment="Left" VerticalAlignment="Top" Height="81" Width="578" Margin="25,80,0,0"/>
+            <Frame x:Name="list" Content="{Binding List}" Margin="10,166,872,10" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="detail" Content="{Binding Detail}" Margin="329,80,324,0" NavigationUIVisibility="Hidden"/>
+           </Grid>
     </Border>
 </Page>

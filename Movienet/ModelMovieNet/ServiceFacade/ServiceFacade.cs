@@ -1,10 +1,5 @@
 ﻿using ModelMovieNet.Factory;
 using ModelMovieNet.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ModelMovieNet.ServiceFacade
 {
@@ -12,12 +7,12 @@ namespace ModelMovieNet.ServiceFacade
     {
 
         private IUserDao uDao    = null;
-        private IMovieDao fDao    = null;
+        private IMovieDao mDao    = null;
         private ICommentDao cDao = null;
 
         public ServiceFacade() {
             cDao = AbstractDaoFactory.getFactory().getCommentDao();
-            fDao = AbstractDaoFactory.getFactory().getMovieDao();
+            mDao = AbstractDaoFactory.getFactory().getMovieDao();
             uDao = AbstractDaoFactory.getFactory().GetUserDao();
         }
 
@@ -26,9 +21,9 @@ namespace ModelMovieNet.ServiceFacade
             return cDao;
         }
 
-        public IMovieDao GetFilmDao()
+        public IMovieDao GetMovieDao()
         {
-            return fDao;
+            return mDao;
         }
 
         public IUserDao GetUserDao()

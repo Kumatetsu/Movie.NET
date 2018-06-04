@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Movienet"
       mc:Ignorable="d"
-      DataContext="{Binding Source={StaticResource VM_UserLocator}, Path=VM_User}"
+      DataContext="{Binding Source={StaticResource VM_UserLocator}, Path=VM_User_Instance}"
       Title="UpdateUser" Height="401.087" Width="187.5">
     <Border BorderBrush="Black" BorderThickness="2">
         <Grid Margin="10,28,0,0">
@@ -22,7 +22,7 @@
             <Label x:Name="label_login" Content="Login" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Width="154"/>
             <Label x:Name="label_password" Content="Password" HorizontalAlignment="Left" Margin="10,263,0,0" VerticalAlignment="Top" Width="154"/>
             <Button x:Name="updateBtn" Content="Update" Command="{Binding Update}" HorizontalAlignment="Left" Margin="10,330,0,0" VerticalAlignment="Top" Width="80" Height="22"/>
-            <Button Content="Delete" MinWidth="10" Margin="90,330,14,21" Command="{Binding Delete}" RenderTransformOrigin="0.5,0.5">
+            <Button Content="Delete" MinWidth="10" Margin="90,330,10,14" Command="{Binding Delete}">
             </Button>
             <Label x:Name="label" Content="UpdateUser" HorizontalAlignment="Left" VerticalAlignment="Top" Height="10" Width="178"/>
         </Grid>
