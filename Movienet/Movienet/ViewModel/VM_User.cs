@@ -355,7 +355,7 @@ namespace Movienet
                     Info = "Logging failed with exception: " + e.Message;
                 }
             }
-            Console.WriteLine("Send user: " + ((checkUser.Id > 0) ? checkUser.Login + " with id: " + checkUser.Id + " as session user" : "INVALID"));
+            Console.WriteLine("Send user: " + ((checkUser != null) ? checkUser.Login + " with id: " + checkUser.Id + " as session user" : "INVALID"));
             MessengerInstance.Send(checkUser, "SetSessionUser");
             Console.WriteLine("Info : " + Info);
         }
@@ -380,7 +380,9 @@ namespace Movienet
                 {
                     Info = "Add happens well";
                     MessengerInstance.Send(STATE.ADD_USER, "SetState");
+                    MessengerInstance.Send(checkUser, "SetSessionUser");
                     Console.WriteLine(Info);
+
                 }
                 else
                 {

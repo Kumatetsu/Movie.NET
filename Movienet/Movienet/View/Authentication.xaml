@@ -19,7 +19,7 @@
             <RowDefinition Height="133*"/>
             <RowDefinition Height="317*"/>
         </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" Margin="1,1,1,1" Width="490" Height="300" Grid.ColumnSpan="2" Grid.RowSpan="2">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" Margin="6,-8,-16,3" Width="490" Height="300" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -39,11 +39,14 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock Text="Authentication" Grid.ColumnSpan="2" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" FontSize="20"/>
-            <TextBlock Text="Login" FontSize="16" Margin="108,45,216,40" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-            <TextBox x:Name="Login" TextWrapping="NoWrap" FontSize="22" AcceptsReturn="False" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Margin="108,75,0,23" MinWidth="100" HorizontalAlignment="Left" Width="276" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-            <TextBlock Text="Password" FontSize="16" Grid.Row="2" Margin="108,-5,220,10" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="Password" TextWrapping="NoWrap" FontSize="22" AcceptsReturn="False" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Margin="108,22,0,0" MinWidth="100" HorizontalAlignment="Left" Width="276" Grid.ColumnSpan="2"/>
-            <Button Command="{Binding Log}" Content="Log in" Grid.Row="3" Margin="108,26,105,10" Grid.ColumnSpan="2"/>
+            <TextBlock Text="Login" FontSize="16" Margin="108,38,216,47" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <TextBox x:Name="Login" TextWrapping="NoWrap" FontSize="22" AcceptsReturn="False" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Margin="108,70,0,47" MinWidth="100" HorizontalAlignment="Left" Width="276" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <TextBlock Text="Password" FontSize="16" Grid.Row="1" Margin="108,33,220,47" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <TextBox x:Name="Password" TextWrapping="NoWrap" FontSize="22" AcceptsReturn="False" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Margin="108,60,0,37" MinWidth="100" HorizontalAlignment="Left" Width="276" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <Button Command="{Binding Log}" Content="Log in" Grid.Row="2" Margin="108,51,105,60" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <TextBlock HorizontalAlignment="Left" Margin="108,30,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="21" Width="259">
+                Si vous n'etes pas enregistre faites le <Hyperlink NavigateUri="AddUser.xaml">ici </Hyperlink>
+            </TextBlock>
         </Grid>
     </Grid>
 </Page>
