@@ -25,6 +25,7 @@
             <TextBox x:Name="password" HorizontalAlignment="Left" Height="23" Margin="6,290,0,0" TextWrapping="Wrap" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
             <Button x:Name="AddBtn" Content="Add a user" Command="{Binding Add}" HorizontalAlignment="Left" Margin="10,376,0,0" VerticalAlignment="Top" Width="95" Grid.Column="2" Height="25"/>
             <Label x:Name="label" Content="AddUser" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="123" Width="189"/>
+            <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="26,415,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="46" Height="15"><Hyperlink NavigateUri="Authentication.xaml">Annuler </Hyperlink></TextBlock>
         </Grid>
     </Border>
 </Page>

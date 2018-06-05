@@ -116,7 +116,7 @@ namespace Movienet
 
         void SetSessionUser(User user)
         {
-            Console.WriteLine("State Machine set session user: " + ((user.Id > 0) ? user.Login : "INVALID USER"));
+            Console.WriteLine("State Machine set session user: " + ((user != null) ? user.Login : "INVALID USER"));
             Session = user;
         }
 
