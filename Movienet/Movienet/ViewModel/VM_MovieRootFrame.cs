@@ -52,6 +52,23 @@ namespace Movienet.ViewModel
             }
         }
 
+        private Page _comments;
+
+        public Page Comments
+        {
+            get { return _comments; }
+            set { _comments = value; }
+        }
+
+        private Page _commentDetail;
+
+        public Page CommentDetail
+        {
+            get { return _commentDetail; }
+            set { _commentDetail = value; }
+        }
+
+
         // Information
         private String _info;
 
@@ -66,6 +83,8 @@ namespace Movienet.ViewModel
             List = new DisplayMovies();
             Detail = new MovieDetail();
             Search = new SearchMovies();
+            Comments = new DisplayComments();
+            CommentDetail = new AddComment();
             MessengerInstance.Register<STATE>(this, "state_changed", StateChangedAck);
             OpenCreateMovie = new RelayCommand(() => GoToAddMovie());
         }

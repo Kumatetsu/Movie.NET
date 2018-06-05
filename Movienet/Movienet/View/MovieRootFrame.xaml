@@ -1,19 +1,22 @@
 ﻿<Page x:Class="Movienet.MovieRootFrame"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Movienet"
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource VM_MovieRootLocator }, Path=VM_MovieRootFrame}"
       Title="MovieRootFrame" Width="1066" Height="788">
     <Grid Margin="0,0,0,38">
         <Menu Margin="10,10,938,699">
-            <MenuItem Header="Add a Movie" Command="{Binding OpenCreateMovie}" Width="270" Height="41" />
+            <MenuItem Header="Add a Movie" Command="{Binding OpenCreateMovie}" Width="232" Height="41" />
         </Menu>
         <Label x:Name="label" Content="MovieRootFrame" HorizontalAlignment="Left" VerticalAlignment="Top" Height="110" Width="318" Margin="10,56,0,0"/>
         <Frame x:Name="list" Content="{Binding List}" NavigationUIVisibility="Hidden" Margin="10,171,814,10"/>
         <Frame x:Name="detail" Content="{Binding Detail}" Margin="257,171,283,10" NavigationUIVisibility="Hidden"/>
         <Frame Content="{Binding Search}" NavigationUIVisibility="Hidden" Margin="288,17,10,579"/>
+        <Frame x:Name="detail" Content="{Binding Detail}" Margin="257,171,379,10" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="comment" Content="{Binding Comments}" Margin="692,166,10,323" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="commentDetail" Content="{Binding CommentDetail}" Margin="692,427,10,10" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Page>

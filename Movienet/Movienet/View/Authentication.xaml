@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       DataContext="{Binding Source={StaticResource VM_UserLocator}, Path=VM_User_Instance}"
       d:DesignHeight="315" d:DesignWidth="500"
-      Background="AntiqueWhite"
+      x:Name="page"
       Title="Authentication">
 
     <Grid x:Name="LoginLayer" Background="Gray" Grid.RowSpan="2" Margin="10,10,10,10">

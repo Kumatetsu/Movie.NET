@@ -5,139 +5,145 @@ using ModelMovieNet.Factory;
 using ModelMovieNet.Interface;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using static Movienet.State_Machine;
 
 namespace Movienet
 {
-    public class VM_Movies: ViewModelBase
+    public class VM_Comment: ViewModelBase
     {
+
         /**
          * Access to Dao, can be inherited
          * */
         private static IServiceFacade Services { get; } = ServiceFacadeFactory.GetServiceFacade();
-        private static IMovieDao mDao { get; } = Services.GetMovieDao();
+        private static ICommentDao cDao { get; } = Services.GetCommentDao();
 
         public RelayCommand Add { get; set; } = null;
         public RelayCommand Update { get; set; } = null;
         public RelayCommand Delete { get; set; } = null;
         public RelayCommand GoToUpdate { get; set; } = null;
 
-        private Movie _movie;
+        private Comment _comment;
         private Page _form;
         private STATE _state;
         private ICollection<Comment> _comments;
         private IDictionary<string, string> _errors { get; set; } = new Dictionary<string, string>()
         {
             { "Id", "Can't update or delete if id is 0" },
-            { "Title", "This field can't be empty" },
-            { "Abstract", "This field can't be empty" },
-            { "Type", "This field can't be empty" },
+            { "Message", "This field can't be empty" },
+            { "Note", "This field can't be empty" },
+            { "Movie", "No movie linked to this comment" },
+            { "User", "No user linked to this comment" },
         };
 
         private string _info;
 
-        public VM_Movies()
+        public VM_Comment()
         {
-            Movie = new Movie();
-            Add = new RelayCommand(AddMovie, CanAdd);
-            Update = new RelayCommand(EditMovie, CanEdit);
-            Delete = new RelayCommand(DeleteMovie, CanDelete);
+            Comment = new Comment();
+            Add = new RelayCommand(AddComment, CanAdd);
+            Update = new RelayCommand(EditComment, CanEdit);
+            Delete = new RelayCommand(DeleteComment, CanDelete);
             GoToUpdate = new RelayCommand(OpenUpdateForm);
             Info = "Informations: ";
             /**
              * State synchronisation
              * */
             MessengerInstance.Register<STATE>(this, "state_changed", HandleStateChange);
+            MessengerInstance.Register<User>(this, "CurrentSessionUser", SetUser);
             MessengerInstance.Register<Movie>(this, "CurrentMovie", SetMovie);
+            MessengerInstance.Register<Comment>(this, "CurrentComment", SetComment);
             MessengerInstance.Register<STATE>(this, "CurrentState", SetState);
             // After registering, we ask for current objects state and user
-            MessengerInstance.Send("VM_Movie", "Context");
+            MessengerInstance.Send("VM_Comment", "Context");
         }
 
         public string Info
         {
             get { return _info; }
-            set {
+            set
+            {
                 _info = value;
                 RaisePropertyChanged("Info");
             }
         }
 
-        private User _sessionUser;
-
-        public User SessionUser
+        void SetUser(User user)
         {
-            get { return _sessionUser; }
-            set { _sessionUser = value; }
+            User = user;
         }
 
-        void SetSessionUser(User sessionUser)
+        void SetMovie(Movie movie)
         {
-            SessionUser = sessionUser;
+            Movie = movie;
         }
 
-        public Movie Movie
+        public Comment Comment
         {
-            get { return _movie; }
-            set {
-                _movie = value;
-                RaiseCUD("Movie");
-                if (_movie != null)
+            get { return _comment; }
+            set
+            {
+                _comment = value;
+                RaiseCUD("Comment");
+                if (_comment != null)
                 {
-                    Hydrate(_movie.Id, _movie.Title, _movie.Type, _movie.Abstract, _movie.Comments);
-                    MessengerInstance.Send("SetMovie", Movie);
+                    Hydrate(_comment.Id, _comment.Message, _comment.Note);
+                    MessengerInstance.Send("SetComment", Comment);
                 }
             }
         }
 
-        public int Id {
-            get { return Movie.Id; }
+        public int Id
+        {
+            get { return Comment.Id; }
             set
             {
-                Movie.Id = value;
+                Comment.Id = value;
                 RaiseCUD("Id");
             }
         }
 
-        public string Title {
-            get { return Movie.Title; }
-            set
-            {
-                Movie.Title = value;
-                RaiseCUD("Title");
-            }
-        }
-
-        public string Type
+        public string Message
         {
-            get { return Movie.Type; }
+            get { return Comment.Message; }
             set
             {
-                Movie.Type = value;
-                RaiseCUD("Type");
+                Comment.Message = value;
+                RaiseCUD("Message");
             }
         }
 
-        public string Abstract
+        public int Note
         {
-            get { return Movie.Abstract; }
+            get { return Comment.Note; }
             set
             {
-                Movie.Abstract = value;
-                RaiseCUD("Abstract");
+                Comment.Note = value;
+                RaiseCUD("Note");
             }
         }
 
-        public ICollection<Comment> Comments {
-            get
-            {
-                return _comments;
-            }
+        public User User
+        {
+            get { return Comment.User; }
             set
             {
-                _comments = value;
-                RaisePropertyChanged("Comments");
+                Comment.User = value;
+                RaiseCUD("User");
+            }
+        }
+
+        public Movie Movie
+        {
+            get { return Comment.Movie; }
+            set
+            {
+                Comment.Movie = value;
+                RaiseCUD("Movie");
             }
         }
 
@@ -160,27 +166,25 @@ namespace Movienet
         /**
          * Shortcut to inline User Props affectation
          * */
-        private void Hydrate(int _id, string _ti, string _ty, string _ab, ICollection<Comment> _co)
+        private void Hydrate(int _id, string _me, int _no)
         {
             Id = _id;
-            Title = _ti;
-            Type = _ty;
-            Abstract = _ab;
-            Comments = _co;
+            Message = _me;
+            Note = _no;
         }
 
-        void SetMovie(Movie movie)
+        void SetComment(Comment comment)
         {
-            Console.WriteLine("VM_Movie: Call to SetMovie, messenger callback");
-            Console.WriteLine("Actual Movie in VM_Movie: " + Movie.ToString());
-            if (movie == null)
+            Console.WriteLine("VM_Comment: Call to SetComment, messenger callback");
+            Console.WriteLine("Actual Comment in VM_Comment: " + Comment.ToString());
+            if (comment == null)
             {
-                Console.WriteLine("Received movie is null");
+                Console.WriteLine("Received comment is null");
             }
             else
             {
-                Console.WriteLine("VM_Movie: Callback for messenger with token CurrentMovie.");
-                Movie = movie;
+                Console.WriteLine("VM_Comment: Callback for messenger with token CurrentComment.");
+                Comment = comment;
             }
         }
 
@@ -197,7 +201,7 @@ namespace Movienet
             {
                 _state = value;
                 Console.WriteLine("State set to: " + _state);
-                Info = "VM_Movie: State set to " + State;
+                Info = "VM_Comment: State set to " + State;
                 RaisePropertyChanged("State");
             }
         }
@@ -207,7 +211,7 @@ namespace Movienet
          * */
         public void SetState(STATE state)
         {
-            Console.WriteLine("VM_Movie: Call to SetState, messenger callback in ");
+            Console.WriteLine("VM_Comment: Call to SetState, messenger callback in ");
             State = state;
         }
 
@@ -218,7 +222,7 @@ namespace Movienet
          * */
         public void HandleStateChange(STATE _)
         {
-            MessengerInstance.Send("VM_Movie after received state_changed", "Context");
+            MessengerInstance.Send("VM_Comment after received state_changed", "Context");
         }
 
         /**
@@ -248,40 +252,41 @@ namespace Movienet
          *  This View Model know how to validate
          *  the object he represent.
          * */
-        protected Boolean IsValidMovie()
+        protected Boolean IsValidComment()
         {
-            Console.WriteLine("Call on IsValidMovie");
+            Console.WriteLine("Call on IsValidComment");
             Boolean check = false;
             Info = "";
-            if (Movie != null)
+            if (Comment != null)
             {
-                Console.WriteLine("IsValidMovie: Movie != null");
+                Console.WriteLine("IsValidComment: Comment != null");
                 check = (
-                    ((Movie.Title != null && Movie.Title.Length != 0) || TriggerFormError("Title")) &&
-                    ((Movie.Type != null && Movie.Type.Length != 0) || TriggerFormError("Type")) &&
-                    ((Movie.Abstract != null && Movie.Abstract.Length != 0) || TriggerFormError("Abstract"))
+                    ((Comment.Message != null && Comment.Message.Length != 0) || TriggerFormError("Message")) &&
+                    ((Comment.Note >= 0) || TriggerFormError("Note")) &&
+                    (Comment.User != null || TriggerFormError("User")) &&
+                    (Comment.Movie != null || TriggerFormError("Movie"))
                 );
             }
-            else { Console.WriteLine("IsValidMovie:  Movie is null"); }
+            else { Console.WriteLine("IsValidComment:  Comment is null"); }
             return check;
         }
 
         /**
-         * Test if there is a selected movie
-         * And if this movie exist in dao
+         * Test if there is a selected comment
+         * And if this comment exist in dao
          * */
-        protected Boolean IsExistingMovie()
+        protected Boolean IsExistingComment()
         {
-            Console.WriteLine("Call on IsExistingMovie");
-            if (Movie == null || Id == 0)
+            Console.WriteLine("Call on IsExistingComment");
+            if (Comment == null || Id == 0)
             {
-                Info = "Movie is null or don't have ID";
+                Info = "Comment is null or don't have ID";
                 Console.WriteLine(Info);
                 return false;
             }
             try
             {
-                Movie check = mDao.GetMovie(Id);
+                Comment check = cDao.GetComment(Id);
                 return (check != null && check.Id == Id) ? true : TriggerFormError("Id");
             }
             catch (Exception e)
@@ -303,24 +308,25 @@ namespace Movienet
 
         void OpenUpdateForm()
         {
-            Form = new UpdateMovie();
+            Form = new UpdateComment();
         }
 
         /**
-         *  Add Movie method used in Add RelayCommand
+         *  Add Comment method used in Add RelayCommand
          *  With CanAdd validator
          * */
-        void AddMovie()
+        void AddComment()
         {
-            Console.WriteLine("In Add Movie from VM_Movie");
-            Info = "Adding a Movie";
+            Console.WriteLine("In Add Comment from VM_Comment");
+            Info = "Adding a Comment";
+
             try
             {
-                Movie checkMovie = CanAdd() ? mDao.CreateMovie(Movie) : null;
-                if (checkMovie != null && checkMovie.Id > 0)
+                Comment checkComment = CanAdd() ? cDao.CreateComment(Comment) : null;
+                if (checkComment != null && checkComment.Id > 0)
                 {
                     Info = "Add happens well";
-                    MessengerInstance.Send(STATE.ADD_MOVIE, "SetState");
+                    MessengerInstance.Send(STATE.ADD_COMMENT, "SetState");
                     Console.WriteLine(Info);
                 }
                 else
@@ -331,7 +337,7 @@ namespace Movienet
             }
             catch (Exception e)
             {
-                Info = "Adding Movie failed with exception: " + e.Message;
+                Info = "Adding Comment failed with exception: " + e.Message;
                 Console.WriteLine(Info);
             }
         }
@@ -342,8 +348,8 @@ namespace Movienet
         Boolean CanAdd()
         {
             Console.WriteLine("Call on CanAdd");
-            bool check = IsValidMovie();
-            Info = check ? "The actual movie is valid" : "The actual movie isn't valid: " + Info;
+            bool check = IsValidComment();
+            Info = check ? "The actual comment is valid" : "The actual comment isn't valid: " + Info;
             return check;
         }
 
@@ -351,17 +357,17 @@ namespace Movienet
          * Method used in Update RelayCommand
          * With CanEdit validator
          * */
-        void EditMovie()
+        void EditComment()
         {
             Console.WriteLine("In Add User from VM_AddUser");
             try
             {
-                Movie checkMovie = CanEdit() ? mDao.UpdateMovie(Movie) : null;
-                if (checkMovie != null && checkMovie.Id > 0)
+                Comment checkComment = CanEdit() ? cDao.UpdateComment(Comment) : null;
+                if (checkComment != null && checkComment.Id > 0)
                 {
                     Info = "Update happens well";
                     Console.WriteLine(Info);
-                    MessengerInstance.Send(STATE.UPDATE_MOVIE, "SetState");
+                    MessengerInstance.Send(STATE.UPDATE_COMMENT, "SetState");
                 }
                 else
                 {
@@ -381,7 +387,7 @@ namespace Movienet
          * */
         Boolean CanEdit()
         {
-            bool check = IsValidMovie() && IsExistingMovie();
+            bool check = IsValidComment() && IsExistingComment();
             Info = check ? "The actual user is valid" : "The actual user isn't valid" + Info;
             return check;
         }
@@ -390,27 +396,27 @@ namespace Movienet
          * Method used in Delete RelayCommand
          * With CanDelete validator
          * */
-        void DeleteMovie()
+        void DeleteComment()
         {
-            Console.WriteLine("In DeleteMovie from VM_Movie");
+            Console.WriteLine("In DeleteComment from VM_Comment");
             if (!CanDelete())
                 return;
-            Info = "Deleting a movie";
+            Info = "Deleting a comment";
             try
             {
-                if (mDao.DeleteMovie(Movie))
+                if (cDao.DeleteComment(Comment))
                 {
-                    Info = "DeleteMovie passed";
-                    MessengerInstance.Send(STATE.DELETE_MOVIE, "SetState");
-                    Movie = new Movie();
+                    Info = "DeleteComment passed";
+                    MessengerInstance.Send(STATE.DELETE_COMMENT, "SetState");
+                    Comment = new Comment();
                 }
                 else
-                    Info = "DeleteMovie failed";
+                    Info = "DeleteComment failed";
                 Console.WriteLine(Info);
             }
             catch (Exception e)
             {
-                Info = "Update movie failed: " + e;
+                Info = "Update comment failed: " + e;
                 Console.WriteLine("Exception PERSONNALISEE: " + e.Message);
             }
         }
@@ -420,8 +426,7 @@ namespace Movienet
          * */
         Boolean CanDelete()
         {
-            return IsExistingMovie();
+            return IsExistingComment();
         }
-
     }
 }
