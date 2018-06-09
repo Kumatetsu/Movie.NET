@@ -10,6 +10,7 @@ namespace ModelMovieNet.Interface
     {
         Movie CreateMovie(Movie movie);
         Movie UpdateMovie(Movie movie);
+        List<Movie> SearchMovies(string query);
         Boolean DeleteMovie(Movie movie);
         Movie GetMovie(int fid);
         List<Movie> getAllMovies();

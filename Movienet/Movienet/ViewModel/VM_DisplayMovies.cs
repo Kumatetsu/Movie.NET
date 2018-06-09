@@ -19,8 +19,19 @@ namespace Movienet
         private ObservableCollection<Movie> _movies;
         private string _info;
         private STATE _state;
+        private String _search;
         // Object used to pass a selected Movie
         private Movie _selectItem;
+
+        public string search
+        {
+            get { return _search; }
+            set
+            {
+                _search = value;
+                RaisePropertyChanged("Search");
+            }
+        }
 
         public string Info
         {

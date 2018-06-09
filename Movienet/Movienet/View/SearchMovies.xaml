@@ -16,7 +16,7 @@
             <ColumnDefinition Width="158*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBox Height="35" Margin="66,19,31,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBox Height="35" Margin="66,19,31,0" TextWrapping="Wrap" Text="{Binding Search}" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Button Content="Search" HorizontalAlignment="Left" Margin="22,10,0,0" VerticalAlignment="Top" Width="87" Height="46" Grid.Column="1" Grid.ColumnSpan="3"/>
 
 

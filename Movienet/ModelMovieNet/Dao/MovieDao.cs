@@ -26,6 +26,11 @@ namespace ModelMovieNet.Dao
             ctx.SaveChanges();
             return true;
         }
+        
+        public bool SearchMovies(string query)
+        {
+
+        }
 
         public List<Movie> getAllMovies()
         {
