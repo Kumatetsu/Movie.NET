@@ -125,6 +125,9 @@
     <Compile Include="View\RootFrame.xaml.cs">
       <DependentUpon>RootFrame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SearchMovies.xaml.cs">
+      <DependentUpon>SearchMovies.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UpdateMovie.xaml.cs">
       <DependentUpon>UpdateMovie.xaml</DependentUpon>
     </Compile>
@@ -205,6 +208,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RootFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SearchMovies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

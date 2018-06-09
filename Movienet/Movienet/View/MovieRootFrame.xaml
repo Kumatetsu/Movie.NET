@@ -11,11 +11,9 @@
         <Menu Margin="10,10,938,699">
             <MenuItem Header="Add a Movie" Command="{Binding OpenCreateMovie}" Width="270" Height="41" />
         </Menu>
-        <TextBlock x:Name="rootInfo" Text="{Binding Info}" HorizontalAlignment="Left" Margin="333,0,0,0"  TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Height="166" Width="412" RenderTransformOrigin="0.5,0.5">
-        </TextBlock>
         <Label x:Name="label" Content="MovieRootFrame" HorizontalAlignment="Left" VerticalAlignment="Top" Height="110" Width="318" Margin="10,56,0,0"/>
         <Frame x:Name="list" Content="{Binding List}" NavigationUIVisibility="Hidden" Margin="10,171,814,10"/>
         <Frame x:Name="detail" Content="{Binding Detail}" Margin="257,171,283,10" NavigationUIVisibility="Hidden"/>
-
+        <Frame Content="{Binding Search}" NavigationUIVisibility="Hidden" Margin="288,17,10,579"/>
     </Grid>
 </Page>

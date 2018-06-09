@@ -38,6 +38,19 @@ namespace Movienet.ViewModel
                 RaisePropertyChanged("Detail");
             }
         }
+        private Page _search;
+        public Page Search
+        {
+            get
+            {
+                return _search;
+            }
+            set
+            {
+                _search = value;
+                RaisePropertyChanged("Search");
+            }
+        }
 
         // Information
         private String _info;
@@ -52,6 +65,7 @@ namespace Movienet.ViewModel
         {
             List = new DisplayMovies();
             Detail = new MovieDetail();
+            Search = new SearchMovies();
             MessengerInstance.Register<STATE>(this, "state_changed", StateChangedAck);
             OpenCreateMovie = new RelayCommand(() => GoToAddMovie());
         }
