@@ -10,10 +10,24 @@ using System.Windows.Controls;
 
 namespace Movienet
 {
-    public class VM_MainWindow: State_Machine
+    public class VM_MainWindow : State_Machine
     {
         private User sessionUser;
         private Page _rootPage;
+        private bool _connected;
+
+        public bool Connected {
+            get
+            {
+                return _connected;
+            }
+            set
+            {
+                _connected = value;
+                RaisePropertyChanged("Connected");
+            }
+        }
+
         public Page RootPage
         {
             get
@@ -73,6 +87,8 @@ namespace Movienet
             if (user != null)
             {
                 Console.WriteLine("VM_MainWindow: rootFrame");
+                Connected = true;
+                Console.WriteLine(Connected);
                 RootPage = new RootFrame();
             }
             else
