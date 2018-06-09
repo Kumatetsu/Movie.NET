@@ -7,18 +7,20 @@
         mc:Ignorable="d"
         DataContext="{Binding Source={StaticResource VM_Locator}, Path=vm_MW}"
         Title="MainWindow" Height="1000" Width="1200">
-    <Grid Background="Gray">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="51*"/>
-            <RowDefinition Height="434*"/>
-        </Grid.RowDefinitions>
-        <Menu Margin="54,10,533,31" Background="White" Visibility="{Binding Connected, Converter={StaticResource BoolToVis}}">
-            <MenuItem Header="Authentication" Command="{Binding OpenAuthentication}"/>
-            <MenuItem Header="User Management" Command="{Binding OpenUserManagement}"/>
-            <MenuItem Header="Movies Management" Command="{Binding OpenMovieManagement}"/>
-        </Menu>
-       
-        <Frame x:Name="root" Background="AntiqueWhite" Content="{Binding RootPage}" Margin="10,30,10,10" NavigationUIVisibility="Hidden" Grid.Row="1"/>
-        <Label x:Name="label" Content="{Binding Info}" HorizontalAlignment="Left" Margin="610,10,0,0" VerticalAlignment="Top" Width="572" Height="120" Grid.RowSpan="2"/>
-    </Grid>
+    <ScrollViewer>
+        <Grid Background="Gray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="51*"/>
+                <RowDefinition Height="434*"/>
+            </Grid.RowDefinitions>
+            <Menu Margin="54,10,533,31" Background="White" Visibility="{Binding Connected, Converter={StaticResource BoolToVis}}">
+                <MenuItem Header="Authentication" Command="{Binding OpenAuthentication}"/>
+                <MenuItem Header="User Management" Command="{Binding OpenUserManagement}"/>
+                <MenuItem Header="Movies Management" Command="{Binding OpenMovieManagement}"/>
+            </Menu>
+
+            <Frame x:Name="root" Background="AntiqueWhite" Content="{Binding RootPage}" Margin="10,30,10,10" NavigationUIVisibility="Hidden" Grid.Row="1"/>
+            <Label x:Name="label" Content="{Binding Info}" HorizontalAlignment="Left" Margin="610,10,0,0" VerticalAlignment="Top" Width="572" Height="120" Grid.RowSpan="2"/>
+        </Grid>
+    </ScrollViewer>
 </controls:MetroWindow>
