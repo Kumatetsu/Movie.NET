@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using ModelMovieNet;
 using ModelMovieNet.Factory;
 using ModelMovieNet.Interface;
@@ -52,11 +53,14 @@ namespace Movienet
             }
         }
 
+        public RelayCommand makeSearch { get; set; }
+
         public VM_DisplayMovies()
         {
             Info = "Informations: ";
             MessengerInstance.Register<STATE>(this, "CurrentState", StateChangedAck);   
             MessengerInstance.Register<STATE>(this, "state_changed", StateChangedAck);
+            makeSearch = new RelayCommand(() => fillMovieListWithSearch());
             try
             {
                 Movies = new ObservableCollection<Movie>(mDao.getAllMovies());
@@ -160,6 +164,20 @@ namespace Movienet
             catch (Exception e)
             {
                 Info = "Exception updating movie list: " + e.Message;
+                Console.WriteLine(Info);
+            }
+        }
+
+        private void fillMovieListWithSearch()
+        {
+            Console.WriteLine("Filling movie search");
+            try
+            {
+                Movies = new ObservableCollection<Movie>(mDao.SearchMovies(search));
+            } 
+            catch (Exception e)
+            {
+                Info = "Exception searching movie list: " + e.Message;
                 Console.WriteLine(Info);
             }
         }

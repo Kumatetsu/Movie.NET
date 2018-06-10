@@ -27,9 +27,14 @@ namespace ModelMovieNet.Dao
             return true;
         }
         
-        public bool SearchMovies(string query)
+        public List<Movie> SearchMovies(string query)
         {
-
+            Console.WriteLine("SearchMovies");
+            DataModelContainer ctx = new DataModelContainer();
+            List<string> query_words = query.Split(' ', ',').ToList();
+            List<Movie> results = ctx.MovieSet.Where(m => query_words.Any(q => m.Title.Contains(q) || m.Abstract.Contains(q) || m.Type.Contains(q))).ToList();
+            return results;
+           
         }
 
         public List<Movie> getAllMovies()
