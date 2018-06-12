@@ -46,6 +46,11 @@ namespace Movienet
             try
             {
                 Comments = new ObservableCollection<Comment>(cDao.getAllComments());
+                Console.WriteLine("Getting comments");
+                foreach (Comment c in Comments)
+                {
+                    Console.WriteLine(c.ToString());
+                }
             }
             catch (Exception e)
             {

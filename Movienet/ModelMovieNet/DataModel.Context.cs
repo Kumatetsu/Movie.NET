@@ -15,11 +15,21 @@ namespace ModelMovieNet
     
     public partial class DataModelContainer : DbContext
     {
+        private static DataModelContainer _instance = null;
         public DataModelContainer()
             : base("name=DataModelContainer")
         {
         }
     
+        public static DataModelContainer GetDb()
+        {
+            if (_instance == null)
+            {
+                _instance = new DataModelContainer();
+            }
+            return _instance;
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

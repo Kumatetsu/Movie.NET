@@ -11,7 +11,7 @@ namespace ModelMovieNet.Dao
     {
         public Movie CreateMovie(Movie movie)
         {
-            DataModelContainer ctx = new DataModelContainer();
+            DataModelContainer ctx = DataModelContainer.GetDb();
             Console.WriteLine("movie in create: " + movie.Title);
             ctx.MovieSet.Add(movie);
             ctx.SaveChanges();
@@ -20,7 +20,7 @@ namespace ModelMovieNet.Dao
 
         public bool DeleteMovie(Movie movie)
         {
-            DataModelContainer ctx = new DataModelContainer();
+            DataModelContainer ctx = DataModelContainer.GetDb();
             Movie toDelete = ctx.MovieSet.Where(m => m.Id == movie.Id).FirstOrDefault();
             ctx.MovieSet.Remove(toDelete);
             ctx.SaveChanges();
@@ -39,20 +39,20 @@ namespace ModelMovieNet.Dao
 
         public List<Movie> getAllMovies()
         {
-            DataModelContainer ctx = new DataModelContainer();
+            DataModelContainer ctx = DataModelContainer.GetDb();
             return ctx.MovieSet.ToList();
         }
 
         public Movie GetMovie(int mid)
         {
-            DataModelContainer ctx = new DataModelContainer();
+            DataModelContainer ctx = DataModelContainer.GetDb();
             return ctx.MovieSet.Where(m => m.Id == mid).FirstOrDefault();
         }
 
         public Movie UpdateMovie(Movie movie)
         {
             Console.WriteLine("Movie passed to update: " + movie.ToString());
-            DataModelContainer ctx = new DataModelContainer();
+            DataModelContainer ctx = DataModelContainer.GetDb();
             Movie toUpdate = ctx.MovieSet.Where(m => m.Id == movie.Id).FirstOrDefault();
             Console.WriteLine("In UpdateMovie, return of update method: " + toUpdate.ToString());
             toUpdate.Title = movie.Title;

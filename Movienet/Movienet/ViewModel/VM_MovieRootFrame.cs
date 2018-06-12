@@ -68,6 +68,14 @@ namespace Movienet.ViewModel
             set { _commentDetail = value; }
         }
 
+        private User _sessionUser;
+
+        public User SessionUser
+        {
+            get { return _sessionUser; }
+            set { _sessionUser = value; }
+        }
+
 
         // Information
         private String _info;
@@ -86,7 +94,14 @@ namespace Movienet.ViewModel
             Comments = new DisplayComments();
             CommentDetail = new AddComment();
             MessengerInstance.Register<STATE>(this, "state_changed", StateChangedAck);
+            MessengerInstance.Register<User>(this, "SessionUser", SetSessionUser);
             OpenCreateMovie = new RelayCommand(() => GoToAddMovie());
+            MessengerInstance.Send("VM_MovieRootFrame", "Context");
+            if (SessionUser != null)
+            {
+                Comments = new DisplayComments();
+                CommentDetail = new AddComment();
+            }
         }
 
         /**
@@ -154,6 +169,15 @@ namespace Movienet.ViewModel
             Movie m = new Movie();
             MessengerInstance.Send(m, "SetMovie");
             MessengerInstance.Send(STATE.ADD_MOVIE, "SetState");
+        }
+
+        void SetSessionUser(User sessionUser)
+        {
+            SessionUser = sessionUser;
+            if (Comments == null)
+                Comments = new DisplayComments();
+            if (CommentDetail == null)
+                CommentDetail = new AddComment();
         }
 
     }

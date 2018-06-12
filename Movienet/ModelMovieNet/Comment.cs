@@ -11,14 +11,17 @@ namespace ModelMovieNet
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Comment
     {
         public int Id { get; set; }
         public string Message { get; set; }
         public int Note { get; set; }
-    
+
+        public int UserId { get; set; }
         public virtual User User { get; set; }
+        public int MovieId { get; set; }
         public virtual Movie Movie { get; set; }
 
         public Comment()

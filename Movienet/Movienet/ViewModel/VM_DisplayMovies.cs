@@ -91,7 +91,9 @@ namespace Movienet
                     Console.WriteLine("VM_DisplayMovies: SelectItem setter");
                     _selectItem = value;
                     Info = "Item selected";
-                    Console.WriteLine("DisplayMovies: Set SelectItem with " + _selectItem.ToString());
+                    Console.WriteLine("DisplayMovies: Set SelectItem with " + _selectItem.Title);
+                    if (_selectItem != null)
+                        Console.WriteLine("DisplayMovies: Set SelectItem with " + _selectItem.ToString());
                     MessengerInstance.Send(_selectItem, "SetMovie");
                     MessengerInstance.Send(STATE.SELECT_MOVIE, "SetState");
                     RaisePropertyChanged("SelectItem");

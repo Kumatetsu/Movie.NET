@@ -131,6 +131,8 @@ namespace Movienet
 
         void SetComment(Comment comment)
         {
+            comment.User = Session;
+            comment.Movie = CurrentMovie;
             CurrentComment = comment;
         }
 

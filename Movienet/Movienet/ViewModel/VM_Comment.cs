@@ -82,6 +82,30 @@ namespace Movienet
             Movie = movie;
         }
 
+        private User _user;
+
+        public User User
+        {
+            get { return _user; }
+            set
+            {
+                _user = value;
+                CommentUser = value;
+            }           
+        }
+
+        private Movie _movie;
+
+        public Movie Movie
+        {
+            get { return _movie; }
+            set {
+                _movie = value;
+                CommentMovie = value;
+            }
+        }
+
+
         public Comment Comment
         {
             get { return _comment; }
@@ -91,7 +115,7 @@ namespace Movienet
                 RaiseCUD("Comment");
                 if (_comment != null)
                 {
-                    Hydrate(_comment.Id, _comment.Message, _comment.Note);
+                    Hydrate(_comment.Id, _comment.Message, _comment.Note, User, Movie);
                     MessengerInstance.Send("SetComment", Comment);
                 }
             }
@@ -127,17 +151,23 @@ namespace Movienet
             }
         }
 
-        public User User
+        public User CommentUser
         {
             get { return Comment.User; }
             set
             {
+                if (value == null)
+                {
+                    Console.WriteLine("Setting Comment User, value is null");
+                    return;
+                }
+                Console.WriteLine("set comment.user: " + value.ToString());
                 Comment.User = value;
                 RaiseCUD("User");
             }
         }
 
-        public Movie Movie
+        public Movie CommentMovie
         {
             get { return Comment.Movie; }
             set
@@ -166,11 +196,14 @@ namespace Movienet
         /**
          * Shortcut to inline User Props affectation
          * */
-        private void Hydrate(int _id, string _me, int _no)
+        private void Hydrate(int _id, string _me, int _no, User _u, Movie _m)
         {
             Id = _id;
             Message = _me;
             Note = _no;
+            CommentUser = _u;
+            CommentMovie = _m;
+            Console.WriteLine("Actual hydrated Comment: " + Comment.ToString());
         }
 
         void SetComment(Comment comment)
@@ -337,7 +370,7 @@ namespace Movienet
             }
             catch (Exception e)
             {
-                Info = "Adding Comment failed with exception: " + e.Message;
+                Info = "Adding Comment failed with exception: " + e.Message + " Stacktrace: " + e.StackTrace;
                 Console.WriteLine(Info);
             }
         }

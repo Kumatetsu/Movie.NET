@@ -11,14 +11,11 @@ namespace ModelMovieNet
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
-        {
-            this.Comments = new HashSet<Comment>();
-        }
     
         public int Id { get; set; }
         public string Login { get; set; }
@@ -27,7 +24,13 @@ namespace ModelMovieNet
         public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comments { get; set; }
+        [InverseProperty("User")]
+        public ICollection<Comment> Comments { get; set; }
+
+        public User()
+        {
+            this.Comments = new HashSet<Comment>();
+        }
 
         public override string ToString()
         {
