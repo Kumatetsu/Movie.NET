@@ -38,6 +38,44 @@ namespace Movienet.ViewModel
                 RaisePropertyChanged("Detail");
             }
         }
+        private Page _search;
+        public Page Search
+        {
+            get
+            {
+                return _search;
+            }
+            set
+            {
+                _search = value;
+                RaisePropertyChanged("Search");
+            }
+        }
+
+        private Page _comments;
+
+        public Page Comments
+        {
+            get { return _comments; }
+            set { _comments = value; }
+        }
+
+        private Page _commentDetail;
+
+        public Page CommentDetail
+        {
+            get { return _commentDetail; }
+            set { _commentDetail = value; }
+        }
+
+        private User _sessionUser;
+
+        public User SessionUser
+        {
+            get { return _sessionUser; }
+            set { _sessionUser = value; }
+        }
+
 
         // Information
         private String _info;
@@ -52,8 +90,18 @@ namespace Movienet.ViewModel
         {
             List = new DisplayMovies();
             Detail = new MovieDetail();
+            Search = new SearchMovies();
+            Comments = new DisplayComments();
+            CommentDetail = new AddComment();
             MessengerInstance.Register<STATE>(this, "state_changed", StateChangedAck);
+            MessengerInstance.Register<User>(this, "SessionUser", SetSessionUser);
             OpenCreateMovie = new RelayCommand(() => GoToAddMovie());
+            MessengerInstance.Send("VM_MovieRootFrame", "Context");
+            if (SessionUser != null)
+            {
+                Comments = new DisplayComments();
+                CommentDetail = new AddComment();
+            }
         }
 
         /**
@@ -121,6 +169,15 @@ namespace Movienet.ViewModel
             Movie m = new Movie();
             MessengerInstance.Send(m, "SetMovie");
             MessengerInstance.Send(STATE.ADD_MOVIE, "SetState");
+        }
+
+        void SetSessionUser(User sessionUser)
+        {
+            SessionUser = sessionUser;
+            if (Comments == null)
+                Comments = new DisplayComments();
+            if (CommentDetail == null)
+                CommentDetail = new AddComment();
         }
 
     }

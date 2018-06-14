@@ -12,7 +12,7 @@ namespace ModelMovieNet.Dao
 
         public User CreateUser(User user)
         {
-            DataModelContainer ctx = new DataModelContainer();
+            DataModelContainer ctx = DataModelContainer.GetDb();
             Console.WriteLine("user in create: " + user.Login);
             ctx.UserSet.Add(user);
             ctx.SaveChanges();
@@ -22,7 +22,7 @@ namespace ModelMovieNet.Dao
         public User UpdateUser(User user)
         {
             Console.WriteLine("User passed to update: " + user.ToString());
-            DataModelContainer ctx = new DataModelContainer();
+            DataModelContainer ctx = DataModelContainer.GetDb();
             User toUpdate = ctx.UserSet.Where(u => u.Id == user.Id).FirstOrDefault();
             Console.WriteLine("In UpdateUser, return of update method: " + toUpdate.ToString());
             toUpdate.Firstname = user.Firstname;
@@ -43,7 +43,7 @@ namespace ModelMovieNet.Dao
 
         public bool DeleteUser(User user)
         {
-            DataModelContainer ctx = new DataModelContainer();
+            DataModelContainer ctx = DataModelContainer.GetDb();
             User toDelete = ctx.UserSet.Where(u => u.Id == user.Id).FirstOrDefault();
             ctx.UserSet.Remove(toDelete);
             ctx.SaveChanges();
@@ -52,19 +52,19 @@ namespace ModelMovieNet.Dao
 
         public List<User> getAllUsers()
         {
-            DataModelContainer ctx = new DataModelContainer();
+            DataModelContainer ctx = DataModelContainer.GetDb();
             return ctx.UserSet.ToList();
         }
 
         public User GetUser(int uid)
         {
-            DataModelContainer ctx = new DataModelContainer();
+            DataModelContainer ctx = DataModelContainer.GetDb();
             return ctx.UserSet.Where(u => u.Id == uid).FirstOrDefault();
         }
 
         public User LogUser(User user)
         {
-            DataModelContainer ctx = new DataModelContainer();
+            DataModelContainer ctx = DataModelContainer.GetDb();
             return ctx.UserSet
                 .Where(u => u.Login == user.Login && user.Password == u.Password)
                 .Select(u => u).FirstOrDefault();

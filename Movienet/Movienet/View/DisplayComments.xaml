@@ -1,0 +1,20 @@
+﻿<Page x:Class="Movienet.DisplayComments"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Movienet"
+      mc:Ignorable="d"
+      DataContext="{Binding Source={StaticResource VM_CommentLocator}, Path=VM_DisplayComments}"
+      Title="DisplayComments" Width="230.754" Height="199.323">
+
+    <Border BorderBrush="Black" BorderThickness="2" Margin="0,0,56,0">
+        <Grid Margin="0,0,10,8">
+            <TextBlock x:Name="dcInfo" HorizontalAlignment="Left" Margin="10,43,0,0"  TextWrapping="WrapWithOverflow" Text="{Binding ListInfo}" VerticalAlignment="Top" Height="22" Width="141" RenderTransformOrigin="0.5,0.5">
+            </TextBlock>
+            <TextBlock x:Name="textBlock" FontSize="32" Text="Display comments"  HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="151"/>
+            <ListBox x:Name="commentListDef" ItemsSource="{Binding Comments}" DisplayMemberPath="Message" SelectedItem="{Binding SelectItem}" Margin="10,79,10,0" Height="98" VerticalAlignment="Top"/>
+        </Grid>
+    </Border>
+
+</Page>

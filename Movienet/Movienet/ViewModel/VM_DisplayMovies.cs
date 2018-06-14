@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using ModelMovieNet;
 using ModelMovieNet.Factory;
 using ModelMovieNet.Interface;
@@ -19,8 +20,19 @@ namespace Movienet
         private ObservableCollection<Movie> _movies;
         private string _info;
         private STATE _state;
+        private String _search;
         // Object used to pass a selected Movie
         private Movie _selectItem;
+
+        public string search
+        {
+            get { return _search; }
+            set
+            {
+                _search = value;
+                RaisePropertyChanged("Search");
+            }
+        }
 
         public string Info
         {
@@ -41,11 +53,14 @@ namespace Movienet
             }
         }
 
+        public RelayCommand makeSearch { get; set; }
+
         public VM_DisplayMovies()
         {
             Info = "Informations: ";
             MessengerInstance.Register<STATE>(this, "CurrentState", StateChangedAck);   
             MessengerInstance.Register<STATE>(this, "state_changed", StateChangedAck);
+            makeSearch = new RelayCommand(() => fillMovieListWithSearch());
             try
             {
                 Movies = new ObservableCollection<Movie>(mDao.getAllMovies());
@@ -76,7 +91,9 @@ namespace Movienet
                     Console.WriteLine("VM_DisplayMovies: SelectItem setter");
                     _selectItem = value;
                     Info = "Item selected";
-                    Console.WriteLine("DisplayMovies: Set SelectItem with " + _selectItem.ToString());
+                    Console.WriteLine("DisplayMovies: Set SelectItem with " + _selectItem.Title);
+                    if (_selectItem != null)
+                        Console.WriteLine("DisplayMovies: Set SelectItem with " + _selectItem.ToString());
                     MessengerInstance.Send(_selectItem, "SetMovie");
                     MessengerInstance.Send(STATE.SELECT_MOVIE, "SetState");
                     RaisePropertyChanged("SelectItem");
@@ -149,6 +166,20 @@ namespace Movienet
             catch (Exception e)
             {
                 Info = "Exception updating movie list: " + e.Message;
+                Console.WriteLine(Info);
+            }
+        }
+
+        private void fillMovieListWithSearch()
+        {
+            Console.WriteLine("Filling movie search");
+            try
+            {
+                Movies = new ObservableCollection<Movie>(mDao.SearchMovies(search));
+            } 
+            catch (Exception e)
+            {
+                Info = "Exception searching movie list: " + e.Message;
                 Console.WriteLine(Info);
             }
         }

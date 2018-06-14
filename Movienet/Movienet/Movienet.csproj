@@ -89,6 +89,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\VM_Comment.cs" />
+    <Compile Include="ViewModel\VM_DisplayComments.cs" />
+    <Compile Include="View\AddComment.xaml.cs">
+      <DependentUpon>AddComment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CommentDetail.xaml.cs">
+      <DependentUpon>CommentDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DisplayComments.xaml.cs">
+      <DependentUpon>DisplayComments.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MovieDetail.xaml.cs">
       <DependentUpon>MovieDetail.xaml</DependentUpon>
     </Compile>
@@ -125,6 +136,12 @@
     <Compile Include="View\RootFrame.xaml.cs">
       <DependentUpon>RootFrame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SearchMovies.xaml.cs">
+      <DependentUpon>SearchMovies.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UpdateComment.xaml.cs">
+      <DependentUpon>UpdateComment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UpdateMovie.xaml.cs">
       <DependentUpon>UpdateMovie.xaml</DependentUpon>
     </Compile>
@@ -134,6 +151,7 @@
     <Compile Include="View\UserDetail.xaml.cs">
       <DependentUpon>UserDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VM_CommentLocator.cs" />
     <Compile Include="VM_Locator.cs" />
     <Compile Include="VM_MainWindow.cs" />
     <Compile Include="VM_MovieLocator.cs" />
@@ -172,6 +190,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\AddComment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CommentDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DisplayComments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MovieDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -205,6 +235,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RootFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SearchMovies.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UpdateComment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

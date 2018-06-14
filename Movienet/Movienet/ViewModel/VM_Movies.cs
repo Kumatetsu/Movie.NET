@@ -17,10 +17,12 @@ namespace Movienet
          * */
         private static IServiceFacade Services { get; } = ServiceFacadeFactory.GetServiceFacade();
         private static IMovieDao mDao { get; } = Services.GetMovieDao();
+
         public RelayCommand Add { get; set; } = null;
         public RelayCommand Update { get; set; } = null;
         public RelayCommand Delete { get; set; } = null;
         public RelayCommand GoToUpdate { get; set; } = null;
+
         private Movie _movie;
         private Page _form;
         private STATE _state;

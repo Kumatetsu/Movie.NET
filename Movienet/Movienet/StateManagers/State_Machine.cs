@@ -27,11 +27,16 @@ namespace Movienet
             SELECT_MOVIE,
             UPDATE_MOVIE,
             DELETE_MOVIE,
+            SELECT_COMMENT,
+            UPDATE_COMMENT,
+            ADD_COMMENT,
+            DELETE_COMMENT,
             NEED_AUTHENTICATION
         };
         private static STATE vm_state;
         private static User currentUser   = null;
         private static Movie currentMovie = null;
+        private static Comment currentComment = null;
         private static User sessionUser   = null;
 
         public State_Machine()
@@ -42,6 +47,7 @@ namespace Movienet
             MessengerInstance.Register<STATE>(this, "SetState", SetState);
             MessengerInstance.Register<User>(this, "SetUser", SetUser);
             MessengerInstance.Register<Movie>(this, "SetMovie", SetMovie);
+            MessengerInstance.Register<Comment>(this, "SetComment", SetComment);
             MessengerInstance.Register<User>(this, "SetSessionUser", SetSessionUser);
             MessengerInstance.Register<string>(this, "Context", SendContext);
         }
@@ -85,6 +91,15 @@ namespace Movienet
             }
         }
 
+        protected Comment CurrentComment
+        {
+            get { return currentComment; }
+            set
+            {
+                currentComment = value;
+            }
+        }
+
         /**
          * Possible upper logic for the class wich
          * implement it (Actually, VM_RootFrame)
@@ -114,6 +129,13 @@ namespace Movienet
             CurrentMovie = movie;
         }
 
+        void SetComment(Comment comment)
+        {
+            comment.User = Session;
+            comment.Movie = CurrentMovie;
+            CurrentComment = comment;
+        }
+
         void SetSessionUser(User user)
         {
             Console.WriteLine("State Machine set session user: " + ((user != null) ? user.Login : "INVALID USER"));
@@ -129,8 +151,10 @@ namespace Movienet
             Console.WriteLine("State_Machine: send context to " + ask);
             Console.WriteLine("State_Machine: currentUser " + CurrentUser?.ToString() + " " + VM_State);
             Console.WriteLine("State_Machine: currentMovie " + CurrentMovie?.ToString() + " " + VM_State);
+            Console.WriteLine("State_Machine: currentComment" + CurrentComment?.ToString() + " " + VM_State);
             MessengerInstance.Send(CurrentUser, "CurrentUser");
             MessengerInstance.Send(CurrentMovie, "CurrentMovie");
+            MessengerInstance.Send(CurrentComment, "CurrentComment");
             MessengerInstance.Send(VM_State, "CurrentState");
             MessengerInstance.Send(Session, "CurrentSessionUser");
         }

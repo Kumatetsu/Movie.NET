@@ -10,8 +10,10 @@ namespace ModelMovieNet.Dao
     {
         public Comment CreateComment(Comment comment)
         {
-            DataModelContainer ctx = new DataModelContainer();
-            Console.WriteLine("comment in create: " + comment.Message);
+            DataModelContainer ctx = DataModelContainer.GetDb();
+            Console.WriteLine("comment in create: " + comment.ToString());
+            ctx.MovieSet.Attach(comment.Movie);
+            ctx.UserSet.Attach(comment.User);
             ctx.CommentSet.Add(comment);
             ctx.SaveChanges();
             return comment;
@@ -19,7 +21,7 @@ namespace ModelMovieNet.Dao
 
         public bool DeleteComment(Comment comment)
         {
-            DataModelContainer ctx = new DataModelContainer();
+            DataModelContainer ctx = DataModelContainer.GetDb();
             Comment toDelete = ctx.CommentSet.Where(c => c.Id == comment.Id).FirstOrDefault();
             ctx.CommentSet.Remove(toDelete);
             ctx.SaveChanges();
@@ -28,25 +30,25 @@ namespace ModelMovieNet.Dao
 
         public List<Comment> getAllComments()
         {
-            DataModelContainer ctx = new DataModelContainer();
+            DataModelContainer ctx = DataModelContainer.GetDb();
             return ctx.CommentSet.ToList();
         }
 
         public Comment GetComment(int cid)
         {
-            DataModelContainer ctx = new DataModelContainer();
+            DataModelContainer ctx = DataModelContainer.GetDb();
             return ctx.CommentSet.Where(c => c.Id == cid).FirstOrDefault();
         }
 
         public Comment UpdateComment(Comment comment)
         {
             Console.WriteLine("Comment passed to update: " + comment.ToString());
-            DataModelContainer ctx = new DataModelContainer();
+            DataModelContainer ctx = DataModelContainer.GetDb();
             Comment toUpdate = ctx.CommentSet.Where(c => c.Id == comment.Id).FirstOrDefault();
             Console.WriteLine("In UpdateComment, return of update method: " + toUpdate.ToString());
             toUpdate.Message = comment.Message;
             toUpdate.Movie = comment.Movie;
-            toUpdate. Note = comment.Note;
+            toUpdate.Note = comment.Note;
             toUpdate.User = comment.User;
             if (toUpdate.Equals(comment))
             {

@@ -13,6 +13,8 @@
             <local:VM_UserLocator x:Key="VM_UserLocator" />
             <local:VM_MovieRootLocator x:Key="VM_MovieRootLocator" />
             <local:VM_MovieLocator x:Key="VM_MovieLocator" />
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
+            <local:VM_CommentLocator x:Key="VM_CommentLocator" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,
              /MahApps.Metro;component/Styles/Controls.xaml" />

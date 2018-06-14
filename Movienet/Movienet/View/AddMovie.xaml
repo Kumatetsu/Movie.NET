@@ -8,7 +8,7 @@
       DataContext="{Binding Source={StaticResource VM_MovieLocator}, Path=VM_Movie_Instance}"
       Title="AddUser" Width="526.257" Height="535.475">
     <Border BorderBrush="Black" BorderThickness="2">
-        <Grid HorizontalAlignment="Left" Width="493" Margin="21,-11,0,31">
+        <Grid HorizontalAlignment="Left" Width="506" Margin="8,-2,0,31">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="14*"/>
                 <ColumnDefinition Width="0*"/>
