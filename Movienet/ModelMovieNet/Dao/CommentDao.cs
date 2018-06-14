@@ -12,8 +12,8 @@ namespace ModelMovieNet.Dao
         {
             DataModelContainer ctx = DataModelContainer.GetDb();
             Console.WriteLine("comment in create: " + comment.ToString());
-            // ctx.MovieSet.Attach(comment.Movie);
-            // ctx.UserSet.Attach(comment.User);
+            ctx.MovieSet.Attach(comment.Movie);
+            ctx.UserSet.Attach(comment.User);
             ctx.CommentSet.Add(comment);
             ctx.SaveChanges();
             return comment;

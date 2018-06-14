@@ -138,6 +138,7 @@
     </Compile>
     <Compile Include="View\SearchMovies.xaml.cs">
       <DependentUpon>SearchMovies.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UpdateComment.xaml.cs">
       <DependentUpon>UpdateComment.xaml</DependentUpon>
     </Compile>
@@ -237,11 +238,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-<<<<<<< 9481cc51bd666f84056083fa8cae50e319b2d923
     <Page Include="View\SearchMovies.xaml">
-=======
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UpdateComment.xaml">
->>>>>>> feature(crud_movie): same all same all à part la facon dont sont display les comments, pas achevé encore.
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

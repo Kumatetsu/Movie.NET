@@ -15,7 +15,6 @@
         <Frame x:Name="list" Content="{Binding List}" NavigationUIVisibility="Hidden" Margin="10,171,814,10"/>
         <Frame x:Name="detail" Content="{Binding Detail}" Margin="257,171,283,10" NavigationUIVisibility="Hidden"/>
         <Frame Content="{Binding Search}" NavigationUIVisibility="Hidden" Margin="288,17,10,579"/>
-        <Frame x:Name="detail" Content="{Binding Detail}" Margin="257,171,379,10" NavigationUIVisibility="Hidden"/>
         <Frame x:Name="comment" Content="{Binding Comments}" Margin="692,166,10,323" NavigationUIVisibility="Hidden"/>
         <Frame x:Name="commentDetail" Content="{Binding CommentDetail}" Margin="692,427,10,10" NavigationUIVisibility="Hidden"/>
     </Grid>
